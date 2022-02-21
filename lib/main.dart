@@ -81,7 +81,7 @@ class _MyAppState extends State<MyApp> {
                 child: Text("Nein")),
             TextButton(
                 onPressed: () {
-                  send("Hello World");
+                  send("!makeCoffe");
                   Navigator.pop(context);
                 },
                 child: Text("Ja")),
@@ -203,6 +203,7 @@ class _MyAppState extends State<MyApp> {
                                   if (dateCheck == true && timeCheck == true) {
                                     date = tempDate;
                                     time = tempTime;
+                                    makeCoffeTime(date, time);
                                     Navigator.pop(context);
                                   }
                                 },
