@@ -13,12 +13,21 @@ async def handling_client(websocket, path):
         async for message in websocket:
             print("[RECIVED]" + message)
             if (message=="!makeCoffe"):
-                os.system("Startcoffe.py")
+                exec(open('Startcoffee.py').read())
             if (message == "!makeCoffeonTime"):
-                os.system("TimeController.py")
-            if (message == "!Disconnect"):
-                break
-            await websocket.send("Pong: " + message)
+                try:
+                    async for date in websocket:
+                        print("[RECIVED]" + date)
+                        try:
+                            async for time in websocket:
+                                print("[RECIVED]" + time)
+                                print (message, date, time)                            
+                                exec(open('Startcoffee.py').read())
+                                await websocket.send("!FINISHED")
+                        except websockets.exceptions.ConnectionClosed as e:
+                            print("[CONNECTION CLOSED]")
+                except websockets.exceptions.ConnectionClosed as e:
+                    print("[CONNECTION CLOSED]")
     except websockets.exceptions.ConnectionClosed as e:
         print("[CONNECTION CLOSED]")
 
