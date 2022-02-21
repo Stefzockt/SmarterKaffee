@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
+import 'con2server.dart';
 
 final ThemeData _dark = ThemeData.dark().copyWith(
   primaryColor: Colors.blueGrey,
 );
-
-
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -15,15 +13,13 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-void main() => runApp(
-MaterialApp(
-home: MyApp(),
-darkTheme: _dark,
-themeMode: ThemeMode.dark,
-debugShowCheckedModeBanner: false,
-title: 'Flutter Theme',
-)
-);
+void main() => runApp(MaterialApp(
+      home: MyApp(),
+      darkTheme: _dark,
+      themeMode: ThemeMode.dark,
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Theme',
+    ));
 
 class _MyAppState extends State<MyApp> {
   late TimeOfDay time = TimeOfDay.now();
@@ -35,11 +31,11 @@ class _MyAppState extends State<MyApp> {
   late bool dateCheck = false;
   late bool timeCheck = false;
 
-Future pickTime(BuildContext context) async {
+  Future pickTime(BuildContext context) async {
     final initialTime = TimeOfDay.now();
     final newTime = await showTimePicker(
-        context: context,
-        initialTime: initialTime,
+      context: context,
+      initialTime: initialTime,
       builder: (context, Widget? child) {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
@@ -50,15 +46,15 @@ Future pickTime(BuildContext context) async {
 
     tempTime = newTime;
     timeCheck = true;
-}
+  }
 
-Future pickDate(BuildContext context) async {
+  Future pickDate(BuildContext context) async {
     final initialDate = DateTime.now();
     final newDate = await showDatePicker(
       context: context,
       initialDate: initialDate,
       firstDate: DateTime(DateTime.now().year - 5),
-      lastDate: DateTime(DateTime.now().year +5),
+      lastDate: DateTime(DateTime.now().year + 5),
       builder: (context, Widget? child) {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
@@ -69,9 +65,9 @@ Future pickDate(BuildContext context) async {
 
     tempDate = newDate;
     dateCheck = true;
-}
+  }
 
-  void confirmCoffee(BuildContext context){
+  void confirmCoffee(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -82,42 +78,39 @@ Future pickDate(BuildContext context) async {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text("Nein")
-            ),
+                child: Text("Nein")),
             TextButton(
                 onPressed: () {
-
-                  //Signal an Kaffeemaschine
-
+                  send("Hello World");
                   Navigator.pop(context);
                 },
-                child: Text("Ja")
-            ),
-          ]
-      ),
+                child: Text("Ja")),
+          ]),
       barrierDismissible: false,
     );
   }
 
-  void timerDialog(BuildContext context){
-  late DateTime now = DateTime.now();
-  late DateTime selected = DateTime(now.year, now.month, now.day, time.hour, time.minute);
-  String timeString = DateFormat.Hm().format(selected);
+  void timerDialog(BuildContext context) {
+    late DateTime now = DateTime.now();
+    late DateTime selected =
+        DateTime(now.year, now.month, now.day, time.hour, time.minute);
+    String timeString = DateFormat.Hm().format(selected);
 
-  displayDate = (dateCheck == false) ? "Kein Datum gestgelegt" : "${date.day}.${date.month}.${date.year}";
-  displayTime = (timeCheck ==false) ? "Keine Uhrzeit festgelegt" : timeString;
+    displayDate = (dateCheck == false)
+        ? "Kein Datum gestgelegt"
+        : "${date.day}.${date.month}.${date.year}";
+    displayTime =
+        (timeCheck == false) ? "Keine Uhrzeit festgelegt" : timeString;
 
-  timeCheck = false;
-  dateCheck = false;
+    timeCheck = false;
+    dateCheck = false;
 
     showDialog(
         barrierDismissible: false,
         context: context,
-        builder: (context) =>
-            Dialog(
+        builder: (context) => Dialog(
               shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0))
-              ),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
               insetPadding: const EdgeInsets.all(10),
               child: SizedBox(
                 height: 600,
@@ -125,43 +118,37 @@ Future pickDate(BuildContext context) async {
                   children: [
                     Expanded(
                         child: Align(
-                          alignment: Alignment.center,
-                          child: Container(
-                            height: 50,
-                            width: 150,
-                            child: TextButton.icon(
-                                onPressed: () {
-                                  pickDate(context);
-                                },
-                                icon: const Icon(Icons.calendar_today),
-                                label: const Text("Datum auswählen")
-                            ),
-                          ),
-                        )
-                    ),
+                      alignment: Alignment.center,
+                      child: Container(
+                        height: 50,
+                        width: 150,
+                        child: TextButton.icon(
+                            onPressed: () {
+                              pickDate(context);
+                            },
+                            icon: const Icon(Icons.calendar_today),
+                            label: const Text("Datum auswählen")),
+                      ),
+                    )),
                     Expanded(
                         child: Align(
-                          alignment: Alignment.center,
-                          child: Container(
-                            height: 50,
-                            width: 150,
-                            margin: const EdgeInsets.only(bottom: 100.0),
-                            child: TextButton.icon(
-                                onPressed: () {
-                                  pickTime(context);
-                                },
-                                icon: const Icon(Icons.watch_later),
-                                label: const Text("Uhrzeit auswählen")
-                            ),
-                          ),
-                        )
-                    ),
+                      alignment: Alignment.center,
+                      child: Container(
+                        height: 50,
+                        width: 150,
+                        margin: const EdgeInsets.only(bottom: 100.0),
+                        child: TextButton.icon(
+                            onPressed: () {
+                              pickTime(context);
+                            },
+                            icon: const Icon(Icons.watch_later),
+                            label: const Text("Uhrzeit auswählen")),
+                      ),
+                    )),
                     Container(
                       margin: const EdgeInsets.only(right: 140.0, bottom: 80),
                       child: Text(
-                        "Aktueller Timer:\n\n Datum: $displayDate\n\n Uhrzeit: $displayTime"
-                        ,
-
+                        "Aktueller Timer:\n\n Datum: $displayDate\n\n Uhrzeit: $displayTime",
                         style: const TextStyle(
                           fontSize: 16,
                         ),
@@ -171,60 +158,55 @@ Future pickDate(BuildContext context) async {
                       children: [
                         Expanded(
                             child: Align(
-                              alignment: Alignment.bottomLeft,
-                              child: SizedBox(
-                                height: 50,
-                                width: 150,
-                                child: TextButton.icon(
-                                    onPressed: () {
-                                      dateCheck = true;
-                                      timeCheck = true;
-                                      Navigator.pop(context);
-                                    },
-                                    icon: const Icon(Icons.cancel_outlined),
-                                    label: const Text("Abbrechen")
-                                ),
-                              ),
-                            )
-                        ),
+                          alignment: Alignment.bottomLeft,
+                          child: SizedBox(
+                            height: 50,
+                            width: 150,
+                            child: TextButton.icon(
+                                onPressed: () {
+                                  dateCheck = true;
+                                  timeCheck = true;
+                                  Navigator.pop(context);
+                                },
+                                icon: const Icon(Icons.cancel_outlined),
+                                label: const Text("Abbrechen")),
+                          ),
+                        )),
                         Expanded(
                             child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: SizedBox(
-                                height: 50,
-                                width: 150,
-                                child: TextButton.icon(
-                                    onPressed: () {
-                                      if (dateCheck == true && timeCheck == true) {
-                                        date = tempDate;
-                                        time = tempTime;
-                                        Navigator.pop(context);
-                                      }
-                                    },
-                                    icon: const Icon(Icons.check),
-                                    label: const Text("Speichern")
-                                ),
-                              ),
-                            )
-                        ),
+                          alignment: Alignment.bottomCenter,
+                          child: SizedBox(
+                            height: 50,
+                            width: 150,
+                            child: TextButton.icon(
+                                onPressed: () {
+                                  if (dateCheck == true && timeCheck == true) {
+                                    date = tempDate;
+                                    time = tempTime;
+                                    Navigator.pop(context);
+                                  }
+                                },
+                                icon: const Icon(Icons.check),
+                                label: const Text("Speichern")),
+                          ),
+                        )),
                       ],
                     ),
-
                   ],
                 ),
               ),
-            )
-    );
+            ));
   }
 
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('Smarter Kaffee'),
-          centerTitle: true,
-        ),
-        body: Center(child: Column(children: <Widget>[
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Smarter Kaffee'),
+        centerTitle: true,
+      ),
+      body: Center(
+        child: Column(children: <Widget>[
           Container(
               margin: const EdgeInsets.all(100),
               child: SizedBox(
@@ -240,9 +222,7 @@ Future pickDate(BuildContext context) async {
                     onPressed: () {
                       confirmCoffee(context);
                     },
-                  )
-              )
-          ),
+                  ))),
           SizedBox(
             height: 50,
             width: 150,
@@ -258,13 +238,8 @@ Future pickDate(BuildContext context) async {
               },
             ),
           ),
-        ]
-        ),
-        ),
-      );
-    }
+        ]),
+      ),
+    );
   }
-
-
-
-
+}
