@@ -22,7 +22,7 @@ async def handling_client(websocket, path):
     except websockets.exceptions.ConnectionClosed as e:
         print("[CONNECTION CLOSED]")
 
-start_server = websockets.serve(handling_client, "localhost", PORT)
+start_server = websockets.serve(handling_client, "192.168.2.118", PORT)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
