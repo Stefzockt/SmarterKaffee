@@ -113,7 +113,7 @@ class _MyAppState extends State<MyApp> {
                   borderRadius: BorderRadius.all(Radius.circular(10.0))),
               insetPadding: const EdgeInsets.all(10),
               child: SizedBox(
-                height: 600,
+                height: 700,
                 child: Column(
                   children: [
                     Expanded(
@@ -143,10 +143,30 @@ class _MyAppState extends State<MyApp> {
                             },
                             icon: const Icon(Icons.watch_later),
                             label: const Text("Uhrzeit auswählen")),
+                        ),
                       ),
-                    )),
+                    ),
+                    Expanded(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Container(
+                            height: 50,
+                            width: 150,
+                            margin: const EdgeInsets.only(bottom: 60.0),
+                            child: TextButton.icon(
+                                onPressed: () {
+                                  dateCheck = false;
+                                  timeCheck = false;
+                                  Navigator.pop(context);
+                                },
+                                icon: const Icon(Icons.refresh),
+                                label: const Text("Timer zurücksetzen")
+                            ),
+                          ),
+                        )
+                    ),
                     Container(
-                      margin: const EdgeInsets.only(right: 140.0, bottom: 80),
+                      margin: const EdgeInsets.only(bottom: 50),
                       child: Text(
                         "Aktueller Timer:\n\n Datum: $displayDate\n\n Uhrzeit: $displayTime",
                         style: const TextStyle(
