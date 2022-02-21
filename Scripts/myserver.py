@@ -1,20 +1,28 @@
+import os
 import websockets
 import asyncio
 
 PORT = 5050
 
-print("Server listening on Port " + str(PORT))
+print("[SERVER STARTING]")
+print("[SERVER LISTENING ON ] " + str(PORT))
 
-async def echo(websocket, path):
-    print("A client just connected")
+async def handling_client(websocket, path):
+    print("[CONNECTION ESTABLISHED]")
     try:
         async for message in websocket:
-            print("Received message from client: " + message)
+            print("[RECIVED]" + message)
+            if (message=="!makeCoffe"):
+                os.system("Startcoffe.py")
+            if (message == "!makeCoffeonTime"):
+                os.system("TimeController.py")
+            if (message == "!Disconnect"):
+                break
             await websocket.send("Pong: " + message)
     except websockets.exceptions.ConnectionClosed as e:
-        print("A client just disconnected")
+        print("[CONNECTION CLOSED]")
 
-start_server = websockets.serve(echo, "192.168.2.113", PORT)
+start_server = websockets.serve(handling_client, "localhost", PORT)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
