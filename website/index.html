@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Smart Kaffee</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="css/main.css" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+	</head>
+	<body>
+
+		<!-- Header -->
+			<header id="header">
+				<div class="content">
+					<h1>Smarter Kaffee</h1>
+					<p>Die smarte Kaffeemaschine</p>
+				</div>
+			</div>
+			</header>
+
+		<!-- Section -->
+			<section class="wrapper">
+				<header class="major">
+					<h2>Ist ausreichend Wasser und ein Pad in der Maschine?</h2>
+					<h2>Ja?</h2>
+					<h2>Dann los!</h2>
+				</header>
+				<div class="inner">
+					<ul class="actions fit">
+						<li><a class="button fit">Ich brauche sofort einen Kaffee</a></li>
+						<li><input class="button fit" name="date" id="date" type="datetime-local" placeholder="Zeit planen"></li>
+					</ul>
+					
+				</div>
+			</section>
+
+		<!--Flatpickr-->
+			<script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
+			<script src="https://npmcdn.com/flatpickr/dist/l10n/de.js"></script>
+			<script>			
+				flatpickr("input[type=datetime-local]", 
+				{	
+					enableTime: true,
+					noCalendar: false,
+					dateFormat: "d.m.Y  H:i",
+					time_24hr: true,
+					"locale": "de",
+				});
+			</script>
+
+	</body>
+</html>
