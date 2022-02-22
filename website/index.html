@@ -27,7 +27,7 @@
 				</header>
 				<div class="inner">
 					<ul class="actions fit">
-						<li><a class="button fit">Ich brauche sofort einen Kaffee</a></li>
+						<li><button class="button" onclick="makeCoffee();">Mach bitte Kaaffe</li>
 						<li><input class="button fit" name="date" id="date" type="datetime-local" placeholder="Zeit planen"></li>
 					</ul>
 					
@@ -46,6 +46,20 @@
 					time_24hr: true,
 					"locale": "de",
 				});
+				function makeCoffee(){
+					var socket = new WebSocket('ws://192.168.43.178:5050');
+					socket.onopen = function(e){
+						socket.send("!makeCoffe");
+					var cancoffe = 0;
+					if (cancoffe == 0){
+						cancoffe=1;
+						socket.onmessage = function(e){
+							if (e == "!FINISHED"){
+								cancoffe =0;
+							}
+						}
+					}
+				}
 			</script>
 
 	</body>

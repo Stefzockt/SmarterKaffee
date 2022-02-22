@@ -20,6 +20,8 @@ async def handling_client(websocket, path):
                 exec(open(f'/home/pi/SmarterKaffee/Scripts/TimeController.py {message_split[1]} {message_split[2]}').read())
             if (message_split[0] == "!RESET"):
                 exec(open(f'Startcoffee.py {message_split[1]} {message_split[2]}').read())
+            await websocket.send("!FINISHED")
+            print("Message send")
     except websockets.exceptions.ConnectionClosed as e:
         print("[CONNECTION CLOSED]")
 

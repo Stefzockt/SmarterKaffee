@@ -2,7 +2,7 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:intl/intl.dart';
 
 int canCoffe = 0; //0 = TRUE
-String IP_ADDRESS = 'ws://192.168.2.113:5050';
+String IP_ADDRESS = 'ws://192.168.43.178:5050';
 
 void send(String command) {
   if (canCoffe == 0) {

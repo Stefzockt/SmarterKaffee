@@ -9,8 +9,7 @@ GPIO.setup(servoPIN, GPIO.OUT)
 p = GPIO.PWM(servoPIN, 50) # GPIO 17 als PWM mit 50Hz
 p.start(2.5) # Initialisierung
 
-
-p.ChangeDutyCycle(6)
+p.ChangeDutyCycle(4)
 time.sleep(0.5)
 p.ChangeDutyCycle(0)
 time.sleep(0.5)
@@ -18,7 +17,7 @@ p.ChangeDutyCycle(7)
 time.sleep(0.5)
 p.ChangeDutyCycle(0)
 time.sleep(10) # Warmup time Coffee
-p.ChangeDutyCycle(8)
+p.ChangeDutyCycle(9)
 time.sleep(0.5)
 p.ChangeDutyCycle(7)
 time.sleep(0.5)
