@@ -3,7 +3,7 @@ import websockets
 import asyncio
 
 PORT = 5050
-IP_ADDRESS = "192.168.2.113"
+IP_ADDRESS = "192.168.43.178"
 
 print("[SERVER STARTING]")
 print("[SERVER LISTENING ON ] " + str(PORT))
@@ -15,9 +15,9 @@ async def handling_client(websocket, path):
             print("[RECIVED]" + message)
             message_split = message.split('\r\n',)
             if (message_split[0] =="!makeCoffe"):
-                exec(open('C:\Projects\SmarterKaffee\Scripts\Startcoffee.py').read())
+                exec(open('/home/pi/SmarterKaffee/Scripts/Startcoffee.py').read())
             if (message_split[0] == "!makeCoffeonTime"):
-                exec(open(f'Startcoffee.py {message_split[1]} {message_split[2]}').read())
+                exec(open(f'/home/pi/SmarterKaffee/Scripts/TimeController.py {message_split[1]} {message_split[2]}').read())
             if (message_split[0] == "!RESET"):
                 exec(open(f'Startcoffee.py {message_split[1]} {message_split[2]}').read())
     except websockets.exceptions.ConnectionClosed as e:
