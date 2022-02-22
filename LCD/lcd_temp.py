@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+#Thermometer Setup
+#modprobe w1_gpio
+#modprobe w1_therm
+#modprobe wire
+#boot/config.txt 
+#dtoverlay=w1-gpio
+#gpiopin=4
 import drivers
 from time import sleep
 
