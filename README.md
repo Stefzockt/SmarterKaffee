@@ -6,6 +6,10 @@ Dieses Projekt entstand um Kaffemaschienen über App sowie Web zu steuern. Somit
 # Server aka. Raspi:
 Du ziehst die Komplette GitRepo auf den Raspi. Dort rufst du nun GitBash auf bzw. öffnest die Konsole und gehst in die Repo rein. Nun tippst du "git checkout server". In diesem Branch findest du alle wichtigen Datein für den Raspi. In der "myserver.py" musst du nur noch den PORT angeben den du nutzen willst sowie die lokale addresse des Raspi.
 Vergiss nicht die fehlenden packeges mit pip install zu installieren.
+In der .bashrc musst du am Ende noch diese Zeilen einfügen.
+
+"echo Runnung at boot"
+"sudo python PFAD"
 
 # App installieren:
 Auf deinem Rechner clonst du dir nun das Projekt.
