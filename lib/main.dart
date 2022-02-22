@@ -131,40 +131,39 @@ class _MyAppState extends State<MyApp> {
                       ),
                     )),
                     Expanded(
-                        child: Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        height: 50,
-                        width: 150,
-                        margin: const EdgeInsets.only(bottom: 100.0),
-                        child: TextButton.icon(
-                            onPressed: () {
-                              pickTime(context);
-                            },
-                            icon: const Icon(Icons.watch_later),
-                            label: const Text("Uhrzeit auswählen")),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Container(
+                          height: 50,
+                          width: 150,
+                          margin: const EdgeInsets.only(bottom: 100.0),
+                          child: TextButton.icon(
+                              onPressed: () {
+                                pickTime(context);
+                              },
+                              icon: const Icon(Icons.watch_later),
+                              label: const Text("Uhrzeit auswählen")),
                         ),
                       ),
                     ),
                     Expanded(
                         child: Align(
-                          alignment: Alignment.center,
-                          child: Container(
-                            height: 50,
-                            width: 150,
-                            margin: const EdgeInsets.only(bottom: 60.0),
-                            child: TextButton.icon(
-                                onPressed: () {
-                                  dateCheck = false;
-                                  timeCheck = false;
-                                  Navigator.pop(context);
-                                },
-                                icon: const Icon(Icons.refresh),
-                                label: const Text("Timer zurücksetzen")
-                            ),
-                          ),
-                        )
-                    ),
+                      alignment: Alignment.center,
+                      child: Container(
+                        height: 50,
+                        width: 150,
+                        margin: const EdgeInsets.only(bottom: 60.0),
+                        child: TextButton.icon(
+                            onPressed: () {
+                              dateCheck = false;
+                              timeCheck = false;
+                              send("!RESET");
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(Icons.refresh),
+                            label: const Text("Timer zurücksetzen")),
+                      ),
+                    )),
                     Container(
                       margin: const EdgeInsets.only(bottom: 50),
                       child: Text(

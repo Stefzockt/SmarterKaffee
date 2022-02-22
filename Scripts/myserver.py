@@ -17,6 +17,8 @@ async def handling_client(websocket, path):
                 exec(open('C:\Projects\SmarterKaffee\Scripts\Startcoffee.py').read())
             if (message_split[0] == "!makeCoffeonTime"):
                 exec(open(f'Startcoffee.py {message_split[1]} {message_split[2]}').read())
+            if (message_split[0] == "!RESET"):
+                exec(open(f'Startcoffee.py {message_split[1]} {message_split[2]}').read())
     except websockets.exceptions.ConnectionClosed as e:
         print("[CONNECTION CLOSED]")
 
