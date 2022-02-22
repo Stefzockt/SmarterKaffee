@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import websockets
 import asyncio
-
+import subprocess as s
 PORT = 5050
 IP_ADDRESS = "192.168.43.178"
 
@@ -17,7 +17,10 @@ async def handling_client(websocket, path):
             if (message_split[0] =="!makeCoffe"):
                 exec(open('/home/pi/SmarterKaffee/Scripts/Startcoffee.py').read())
             if (message_split[0] == "!makeCoffeonTime"):
-                exec(open(f'/home/pi/SmarterKaffee/Scripts/TimeController.py {message_split[1]} {message_split[2]}').read())
+                websocket.send("!FINISHED")
+                cmd = f'/home/pi/SmarterKaffee/Scripts/TimeController.py {message_split[1]} {message_split[2]}'
+                s.call(cmd, shell=True)
+                #exec(open(f'/home/pi/SmarterKaffee/Scripts/TimeController.py {message_split[1]} {message_split[2]}').read())
             if (message_split[0] == "!RESET"):
                 exec(open(f'Startcoffee.py {message_split[1]} {message_split[2]}').read())
             await websocket.send("!FINISHED")

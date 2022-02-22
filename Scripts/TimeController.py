@@ -14,6 +14,6 @@ try:
         current_time = now.strftime("%H:%M")
         current_date = now.date()
         if starttime == current_time and startdate == current_date:
-            subprocess.call("./Startcoffee.py", shell=True)
+            subprocess.call("/home/pi/SmarterKaffee/Scripts/Startcoffee.py", shell=True)
             fertig = True
 except:KeyboardInterrupt
